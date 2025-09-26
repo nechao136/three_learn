@@ -1,0 +1,9 @@
+version: "3.9"
+
+services:
+  three_learn:
+    build: .
+    container_name: three_learn
+    ports:
+      - "10089:80"   # 访问 http://localhost:10089
+    restart: unless-stopped
