@@ -7,14 +7,6 @@ on:
       - master   # 或你希望自动发布的分支
 
 jobs:
-  test-runner:
-    runs-on:
-      - self-hosted
-    steps:
-      - run: |
-          echo "Runner is working!"
-          echo "OS: $RUNNER_OS"
-          echo "Labels: $RUNNER_LABELS"
   build-and-deploy:
     runs-on:
       - self-hosted
@@ -36,6 +28,6 @@ jobs:
       - name: Deploy
         run: |
           # 先停止
-          docker compose down --rmi local -v
+          docker compose down --volumes
           # 再启动
           docker compose up --build -d
