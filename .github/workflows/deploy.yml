@@ -35,6 +35,6 @@ jobs:
       - name: Deploy
         run: |
           # 先停止
-          docker compose down --rmi local -v
+          sudo docker compose down --rmi local -v
           # 再启动
-          docker compose up --build -d
+          sudo docker compose up --build -d
