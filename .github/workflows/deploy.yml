@@ -1,0 +1,36 @@
+name: Auto Deploy
+
+# 触发条件
+on:
+  push:
+    branches:
+      - master   # 或你希望自动发布的分支
+
+jobs:
+  build-and-deploy:
+    runs-on:
+      - self-hosted
+      - Linux
+      - X64
+      - 150.109.15.178
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20' # 你的 Node.js 版本
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build project
+        run: npm run build
+
+      - name: Deploy
+        run: |
+          # 先停止
+          docker compose down --rmi local -v
+          # 再启动
+          docker compose up --build -d
