@@ -7,30 +7,12 @@ on:
       - master   # 或你希望自动发布的分支
 
 jobs:
-#  test:
-#    runs-on:
-#      - self-hosted
-#    steps:
-#      - run: |
-#          docker --version
-#          docker compose version
   build-and-deploy:
     runs-on:
       - self-hosted
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '20' # 你的 Node.js 版本
-
-      - name: Install dependencies
-        run: npm install
-
-      - name: Build project
-        run: npm run build
 
       - name: Deploy
         run: |
